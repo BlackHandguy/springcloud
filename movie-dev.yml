@@ -1,0 +1,25 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: micservice-movie
+#eureka配置
+eureka:
+  client:
+    register-with-eureka: true   #作为客户端需要注册到eureka   （作为服务调用者，false也可以）
+    fetch-registry: true          #作为客户端需要从eureka获取服务注册信息      （服务调用者）
+    service-url:                 #客户端注册地址
+      defaultZone: http://127.0.0.1:8888/eureka
+    registry-fetch-interval-seconds: 5     #默认每隔30秒重新获取并更新注册信息   （服务调用者）
+  instance:
+    prefer-ip-address: true     #优先使用该服务的IP地址注册到eureka，在实际的生产环境建议改成true
+
+#修改ribbon的负载均衡算法
+#microservice-user:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+#开启Hystrix (OpenFeign使用Hystrix第一步)
+feign:
+  hystrix:
+    enabled: true
